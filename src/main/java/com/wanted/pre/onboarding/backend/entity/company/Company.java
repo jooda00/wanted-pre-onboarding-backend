@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wanted.pre.onboarding.backend.entity.recruitment.Recruitment;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "company_id")
 	private Long id;
 
 	private String name;
