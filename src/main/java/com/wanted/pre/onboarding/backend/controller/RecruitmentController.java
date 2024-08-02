@@ -2,6 +2,7 @@ package com.wanted.pre.onboarding.backend.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,6 +33,13 @@ public class RecruitmentController {
 		@RequestBody RecruitmentUpdate update) {
 		recruitmentService.updateRecruitment(companyId, recruitmentId, update);
 		CommonResponse response = new CommonResponse(HttpStatus.CREATED, update);
+		return new ResponseEntity<>(response, response.getCode());
+	}
+
+	@DeleteMapping("/v1/recruitments/{companyId}/{recruitmentId}")
+	public ResponseEntity<CommonResponse> deleteRecruitment(@PathVariable("companyId") Long companyId, @PathVariable("recruitmentId") Long recruitmentId) {
+		recruitmentService.deleteRecruitment(companyId, recruitmentId);
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentId);
 		return new ResponseEntity<>(response, response.getCode());
 	}
 }
