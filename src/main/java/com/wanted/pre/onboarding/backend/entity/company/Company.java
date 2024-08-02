@@ -1,5 +1,6 @@
 package com.wanted.pre.onboarding.backend.entity.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wanted.pre.onboarding.backend.entity.recruitment.Recruitment;
@@ -11,10 +12,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +31,16 @@ public class Company {
 	private String city;
 
 	@OneToMany(mappedBy = "company", orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Recruitment> recruitments;
+	private List<Recruitment> recruitments = new ArrayList<>();
+
+	public Company(Long id, String name, String country, String city) {
+		this.id = id;
+		this.name = name;
+		this.country = country;
+		this.city = city;
+	}
+
+	// public void addRecruitment(Recruitment recruitment) {
+	// 	recruitments.add(recruitment);
+	// }
 }
