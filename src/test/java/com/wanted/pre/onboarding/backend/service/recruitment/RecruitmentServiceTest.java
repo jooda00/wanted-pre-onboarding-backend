@@ -116,4 +116,20 @@ class RecruitmentServiceTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("해당 채용공고는 존재하지 않습니다.");
 	}
+
+	@Test
+	@DisplayName("채용공고를 삭제하면 정상적으로 삭제된다.")
+	void deleteRecruitment() {
+		// Given
+		when(companyRepository.findById(company.getId())).thenReturn(Optional.of(company));
+		when(recruitmentRepository.findById(targetRecruitment.getId())).thenReturn(Optional.of(targetRecruitment));
+
+		// When
+		recruitmentService.deleteRecruitment(company.getId(), targetRecruitment.getId());
+
+		// Then
+		verify(companyRepository).findById(company.getId());
+		verify(recruitmentRepository).findById(targetRecruitment.getId());
+		verify(recruitmentRepository).delete(targetRecruitment);
+	}
 }
