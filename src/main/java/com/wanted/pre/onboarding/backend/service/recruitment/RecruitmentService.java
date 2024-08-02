@@ -33,6 +33,17 @@ public class RecruitmentService {
 			.orElseThrow(() -> new IllegalArgumentException("회사가 존재하지 않습니다."));
 		Recruitment recruitment = recruitmentRepository.findById(recruitmentId)
 			.orElseThrow(() -> new IllegalArgumentException("해당 채용공고는 존재하지 않습니다."));
+		if(!company.getRecruitments().contains(recruitment)) throw new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 수정할 수 없습니다.");
 		recruitment.updateRecruitment(update); // 변경 감지
+	}
+
+	@Transactional
+	public void deleteRecruitment(Long companyId, Long recruitmentId) {
+		Company company = companyRepository.findById(companyId)
+			.orElseThrow(() -> new IllegalArgumentException("회사가 존재하지 않습니다."));
+		Recruitment recruitment = recruitmentRepository.findById(recruitmentId)
+			.orElseThrow(() -> new IllegalArgumentException("해당 채용공고는 존재하지 않습니다."));
+		if(!company.getRecruitments().contains(recruitment)) throw new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 삭제할 수 없습니다.");
+		recruitmentRepository.delete(recruitment);
 	}
 }
