@@ -1,9 +1,13 @@
 package com.wanted.pre.onboarding.backend.service.recruitment;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentRequest;
+import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentResponse;
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentUpdate;
 import com.wanted.pre.onboarding.backend.entity.company.Company;
 import com.wanted.pre.onboarding.backend.entity.recruitment.Recruitment;
@@ -45,5 +49,13 @@ public class RecruitmentService {
 			.orElseThrow(() -> new IllegalArgumentException("해당 채용공고는 존재하지 않습니다."));
 		if(!company.getRecruitments().contains(recruitment)) throw new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 삭제할 수 없습니다.");
 		recruitmentRepository.delete(recruitment);
+	}
+
+	public List<RecruitmentResponse> findRecruitmentList() {
+		List<RecruitmentResponse> recruitments = recruitmentRepository.findAll()
+			.stream()
+			.map(recruitment -> new RecruitmentResponse(recruitment))
+			.collect(Collectors.toList());
+		return recruitments;
 	}
 }
