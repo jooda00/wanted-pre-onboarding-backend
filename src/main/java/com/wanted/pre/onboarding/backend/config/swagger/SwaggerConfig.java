@@ -1,4 +1,4 @@
-package com.wanted.pre.onboarding.backend.config;
+package com.wanted.pre.onboarding.backend.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
