@@ -58,4 +58,8 @@ public class RecruitmentService {
 			.collect(Collectors.toList());
 		return recruitments;
 	}
+
+	public List<RecruitmentResponse> findRecruitmentListByKeyword(String keyword) {
+		return recruitmentRepository.findRecruitmentsByKeyword(keyword);
+	}
 }
