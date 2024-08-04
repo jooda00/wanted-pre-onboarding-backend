@@ -18,6 +18,7 @@ bin/
 !**/src/test/**/bin/
 *.properties
 *.yml
+*.sql
 
 ### IntelliJ IDEA ###
 .idea
