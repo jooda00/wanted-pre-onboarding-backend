@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class RecruitmentRepositoryImpl implements RecruitmentCustomRepository{
+public class RecruitmentRepositoryImpl implements RecruitmentCustomRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
