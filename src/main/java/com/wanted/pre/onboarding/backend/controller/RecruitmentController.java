@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wanted.pre.onboarding.backend.dto.common.CommonResponse;
@@ -52,5 +53,10 @@ public class RecruitmentController {
 		recruitmentService.deleteRecruitment(companyId, recruitmentId);
 		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentId);
 		return new ResponseEntity<>(response, response.getCode());
+	}
+
+	@GetMapping("/v1/recruitments/search")
+	public List<RecruitmentResponse> searchRecruitments(@RequestParam String keyword) {
+		return recruitmentService.findRecruitmentListByKeyword(keyword);
 	}
 }
