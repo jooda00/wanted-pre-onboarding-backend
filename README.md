@@ -142,3 +142,4 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 1. **main** 브랜치에서 **feature/{번호}** 브랜치 생성(ex. feature/1)
 2. **feature/{번호}** 브랜치가 담당한 **issue** 기능을 모두 수행하면
 3. **issue** close 후 **main** 브랜치에 merge
+4. 만약 리팩토링이 필요하다면 **refactor/{번호}** 브랜치 생성 후 리팩토링
