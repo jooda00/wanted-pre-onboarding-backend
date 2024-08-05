@@ -1,15 +1,21 @@
 package com.wanted.pre.onboarding.backend.entity.recruitment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentUpdate;
+import com.wanted.pre.onboarding.backend.entity.application.Application;
 import com.wanted.pre.onboarding.backend.entity.company.Company;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +39,9 @@ public class Recruitment {
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
+
+	@OneToMany(mappedBy = "recruitment", fetch = FetchType.LAZY)
+	private List<Application> applications = new ArrayList<>();
 
 	public Recruitment(String position, int compensation, String content, String skill) {
 		this.position = position;
