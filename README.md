@@ -137,3 +137,8 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 - refactor: 기능에 영향을 주지 않는 코드 리팩토링
 - test: 테스트 코드
 ```
+
+### 📌 Branch 전략
+1. **main** 브랜치에서 **feature/{번호}** 브랜치 생성(ex. feature/1)
+2. **feature/{번호}** 브랜치가 담당한 **issue** 기능을 모두 수행하면
+3. **issue** close 후 **main** 브랜치에 merge
