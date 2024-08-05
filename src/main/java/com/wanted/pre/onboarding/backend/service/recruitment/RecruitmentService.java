@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentDetailResponse;
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentRequest;
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentResponse;
 import com.wanted.pre.onboarding.backend.dto.recruitment.RecruitmentUpdate;
@@ -61,5 +62,11 @@ public class RecruitmentService {
 
 	public List<RecruitmentResponse> findRecruitmentListByKeyword(String keyword) {
 		return recruitmentRepository.findRecruitmentsByKeyword(keyword);
+	}
+
+	public RecruitmentDetailResponse findRecruitmentDetail(Long id) {
+		Recruitment recruitment = recruitmentRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("해당 채용공고는 존재하지 않습니다."));
+		return new RecruitmentDetailResponse(recruitment);
 	}
 }

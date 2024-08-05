@@ -1,4 +1,4 @@
-package com.wanted.pre.onboarding.backend.controller;
+package com.wanted.pre.onboarding.backend.controller.recruitment;
 
 import java.util.List;
 
@@ -56,7 +56,14 @@ public class RecruitmentController {
 	}
 
 	@GetMapping("/v1/recruitments/search")
-	public List<RecruitmentResponse> searchRecruitments(@RequestParam String keyword) {
-		return recruitmentService.findRecruitmentListByKeyword(keyword);
+	public ResponseEntity<CommonResponse> searchRecruitments(@RequestParam String keyword) {
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentService.findRecruitmentListByKeyword(keyword));
+		return new ResponseEntity<>(response, response.getCode());
+	}
+
+	@GetMapping("/v1/recruitments/{id}")
+	public ResponseEntity<CommonResponse> getRecruitmentDetail(@PathVariable("id") Long id) {
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentService.findRecruitmentDetail(id));
+		return new ResponseEntity<>(response, response.getCode());
 	}
 }
