@@ -1,4 +1,4 @@
-package com.wanted.pre.onboarding.backend.controller;
+package com.wanted.pre.onboarding.backend.controller.recruitment;
 
 import java.util.List;
 
