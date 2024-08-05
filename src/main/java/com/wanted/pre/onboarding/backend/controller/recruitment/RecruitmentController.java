@@ -29,7 +29,7 @@ public class RecruitmentController {
 	@GetMapping("/v1/recruitments")
 	public ResponseEntity<CommonResponse> getRecruitment() {
 		List<RecruitmentResponse> recruitmentResponses = recruitmentService.findRecruitmentList();
-		CommonResponse response = new CommonResponse(HttpStatus.ACCEPTED, recruitmentResponses);
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentResponses);
 		return new ResponseEntity<>(response, response.getCode());
 	}
 
