@@ -129,6 +129,8 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
   "recruitmentId": 1
 }
 ```
+#### Swagger UI
+![image](https://github.com/user-attachments/assets/8d7178f5-1692-4f86-87b7-3bfaf173bd13)
 
 ### 📌 Git Convention
 ```
