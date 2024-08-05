@@ -152,27 +152,51 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 `service` 메소드 **단위 테스트** 실행
 1. `Given - When - Then` 패턴 사용
 2. `Mockito` 사용
-```java
-@Test
-@DisplayName("사용자가 채용공고에 지원하면 정상적으로 지원된다.")
-void saveApplicationByUser() {
-    // Given
-    User user = new User(1L);
-    Company company = new Company(1L, "원티드", "한국", "서울");
-    Recruitment recruitment = new Recruitment(1L, "백엔드 주니어 개발자", 1000, "자프링 개발자 모집합니다.", "Java");
-    recruitment.setCompany(company);
 
-    when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-    when(recruitmentRepository.findById(recruitment.getId())).thenReturn(Optional.of(recruitment));
-
-    // When
-    applicationService.saveApplication(new ApplicationRequest(user.getId(), recruitment.getId()));
-
-    // Then
-    verify(applicationRepository).save(any(Application.class));
-    verify(applicationRepository).existsByUserAndRecruitment(user, recruitment);
-}
+### 📌 Structure
 ```
+src.main
+└── java
+    └── com.wanted.pre.onboarding.backend
+                ├── config
+                |      ├── querydsl
+                |      └── swagger
+                |
+                ├── controller  
+                |      ├── application
+                |      └── recruitment
+                |
+                ├── dto
+                |      ├── application
+                |      ├── common   
+                |      └── recruitment
+                |
+                ├── entity
+                |      ├── application
+                |      ├── company   
+                |      ├── recruitment
+                |      └── user
+                |
+                ├── repository
+                |      ├── application
+                |      ├── company   
+                |      ├── recruitment
+                |      └── user
+                |
+                ├── service
+                |      ├── application 
+                |      └── recruitment
+                |
+                └── PreOnboardingBackendApplication
+src.test
+└── java
+    └── com.wanted.pre.onboarding.backend
+                ├── service
+                |      ├── application
+                |      └── recruitment
+                └── PreOnboardingBackendApplicationTests
+```
+
 ### 📌 Git Convention
 ```
 - feat: 새로운 기능
