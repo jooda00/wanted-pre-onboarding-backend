@@ -124,6 +124,8 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 ```
 
 #### 7. 사용자 채용 공고 지원
+(사용자는 미리 DB에 저장을 해놓았다고 가정한다.)
+
 사용자 id와 채용공고 id를 PathVariable로 받아서 사용자가 채용 공고에 지원할 수 있도록 한다.
 ```json
 {
@@ -141,9 +143,35 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 
 존재하지 않는 채용 공고 : new IllegalArgumentException("해당 채용공고는 존재하지 않습니다.")
     
-해당 회사가 작성하지 않은 채용 공고 수정/삭제 : new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 삭제/수정할 수 없습니다.")**
+해당 회사가 작성하지 않은 채용 공고 수정/삭제 : new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 삭제/수정할 수 없습니다.")
 
 사용자 채용 공고 중복 지원 : new IllegalArgumentException("이미 지원한 공고입니다.")
+```
+
+### 📌 테스트
+`service` 메소드 **단위 테스트** 실행
+1. `Given - When - Then` 패턴 사용
+2. `Mockito` 사용
+```java
+@Test
+@DisplayName("사용자가 채용공고에 지원하면 정상적으로 지원된다.")
+void saveApplicationByUser() {
+    // Given
+    User user = new User(1L);
+    Company company = new Company(1L, "원티드", "한국", "서울");
+    Recruitment recruitment = new Recruitment(1L, "백엔드 주니어 개발자", 1000, "자프링 개발자 모집합니다.", "Java");
+    recruitment.setCompany(company);
+
+    when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+    when(recruitmentRepository.findById(recruitment.getId())).thenReturn(Optional.of(recruitment));
+
+    // When
+    applicationService.saveApplication(new ApplicationRequest(user.getId(), recruitment.getId()));
+
+    // Then
+    verify(applicationRepository).save(any(Application.class));
+    verify(applicationRepository).existsByUserAndRecruitment(user, recruitment);
+}
 ```
 ### 📌 Git Convention
 ```
@@ -152,6 +180,7 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 - refactor: 기능에 영향을 주지 않는 코드 리팩토링
 - test: 테스트 코드
 - docs: readme 수정
+- style: 코드 포맷팅
 ```
 
 ### 📌 Branch 전략
