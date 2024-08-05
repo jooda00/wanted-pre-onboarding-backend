@@ -151,6 +151,7 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 - chore: 빌드 업무 수정, 패키지 매니저 수정. 기능과 상관 없는 파일
 - refactor: 기능에 영향을 주지 않는 코드 리팩토링
 - test: 테스트 코드
+- docs: readme 수정
 ```
 
 ### 📌 Branch 전략
