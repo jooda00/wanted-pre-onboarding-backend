@@ -18,8 +18,10 @@
 (밑의 응답 값은 data에 들어가는 json만 삽입했다.)
 ```json
 {
-  "code": "응답 코드"
-  "data": {"json 객체"}
+  "code": "응답 코드",
+  "data": {
+    "json 객체"
+  }
 }
 ```
 #### 1. 채용 공고 등록
@@ -132,6 +134,17 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 #### Swagger UI
 ![image](https://github.com/user-attachments/assets/8d7178f5-1692-4f86-87b7-3bfaf173bd13)
 
+#### 예외 처리
+예외는 `service` 단에서 `IllegalArgumentException`를 날려주었다.
+```java
+존재하지 않는 회사 : new IllegalArgumentException("회사가 존재하지 않습니다.")
+
+존재하지 않는 채용 공고 : new IllegalArgumentException("해당 채용공고는 존재하지 않습니다.")
+    
+해당 회사가 작성하지 않은 채용 공고 수정/삭제 : new IllegalArgumentException("귀사가 작성하지 않은 채용공고는 삭제/수정할 수 없습니다.")**
+
+사용자 채용 공고 중복 지원 : new IllegalArgumentException("이미 지원한 공고입니다.")
+```
 ### 📌 Git Convention
 ```
 - feat: 새로운 기능
