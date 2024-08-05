@@ -11,10 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +24,8 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Application> applications = new ArrayList<>();
+
+	public User(Long id) {
+		this.id = id;
+	}
 }
