@@ -56,8 +56,9 @@ public class RecruitmentController {
 	}
 
 	@GetMapping("/v1/recruitments/search")
-	public List<RecruitmentResponse> searchRecruitments(@RequestParam String keyword) {
-		return recruitmentService.findRecruitmentListByKeyword(keyword);
+	public ResponseEntity<CommonResponse> searchRecruitments(@RequestParam String keyword) {
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentService.findRecruitmentListByKeyword(keyword));
+		return new ResponseEntity<>(response, response.getCode());
 	}
 
 	@GetMapping("/v1/recruitments/{id}")
