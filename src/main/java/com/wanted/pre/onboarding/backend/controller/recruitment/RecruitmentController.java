@@ -59,4 +59,10 @@ public class RecruitmentController {
 	public List<RecruitmentResponse> searchRecruitments(@RequestParam String keyword) {
 		return recruitmentService.findRecruitmentListByKeyword(keyword);
 	}
+
+	@GetMapping("/v1/recruitments/{id}")
+	public ResponseEntity<CommonResponse> getRecruitmentDetail(@PathVariable("id") Long id) {
+		CommonResponse response = new CommonResponse(HttpStatus.OK, recruitmentService.findRecruitmentDetail(id));
+		return new ResponseEntity<>(response, response.getCode());
+	}
 }
