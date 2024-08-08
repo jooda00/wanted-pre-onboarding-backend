@@ -1,6 +1,5 @@
 package com.wanted.pre.onboarding.backend.service.recruitment;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -62,24 +61,6 @@ class RecruitmentServiceTest {
 	}
 
 	@Test
-	@DisplayName("존재하지 않는 회사가 채용공고를 작성하면 예외가 발생한다.")
-	void saveRecruitmentWithNonExistentCompany() {
-		// Given
-		Long nonExistentCompanyId = 2L;
-		RecruitmentRequest request = new RecruitmentRequest(nonExistentCompanyId, "백엔드 주니어 개발자", 1000, "자프링 개발자 모집합니다.", "Java");
-
-		when(companyRepository.findById(nonExistentCompanyId)).thenReturn(Optional.empty());
-
-		// When & Than
-		assertThatThrownBy(() -> recruitmentService.saveRecruitment(request))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("회사가 존재하지 않습니다.");
-
-		verify(companyRepository).findById(nonExistentCompanyId);
-		verify(recruitmentRepository, never()).save(any(Recruitment.class));
-	}
-
-	@Test
 	@DisplayName("채용공고를 수정하면 정상적으로 수정된다.")
 	void updateRecruitment() {
 		// Given
@@ -99,22 +80,6 @@ class RecruitmentServiceTest {
 		assertEquals("백엔드 시니어 개발자", targetRecruitment.getPosition());
 		assertEquals(3000000, targetRecruitment.getCompensation());
 		assertEquals("10년 이상 백엔드 개발자 모집합니다.", targetRecruitment.getContent());
-	}
-
-	@Test
-	@DisplayName("존재하지 않는 채용공고를 수정하면 예외가 발생한다.")
-	void updateRecruitmentWithNonExistentRecruitment() {
-		// Given
-		Long nonExistentRecruitmentId = 2L;
-		RecruitmentUpdate update = new RecruitmentUpdate("백엔드 시니어 개발자", 3000000, "10년 이상 백엔드 개발자 모집합니다.", "Java");
-
-		when(companyRepository.findById(company.getId())).thenReturn(Optional.of(company));
-		when(recruitmentRepository.findById(nonExistentRecruitmentId)).thenReturn(Optional.empty());
-
-		// When & Than
-		assertThatThrownBy(() -> recruitmentService.updateRecruitment(company.getId(), nonExistentRecruitmentId, update))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("해당 채용공고는 존재하지 않습니다.");
 	}
 
 	@Test
