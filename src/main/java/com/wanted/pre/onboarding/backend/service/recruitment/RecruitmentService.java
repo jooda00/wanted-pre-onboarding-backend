@@ -53,7 +53,7 @@ public class RecruitmentService {
 	}
 
 	public List<RecruitmentResponse> findRecruitmentList() {
-		List<RecruitmentResponse> recruitments = recruitmentRepository.findAll()
+		List<RecruitmentResponse> recruitments = recruitmentRepository.findAllRecruitmentWithCompany()
 			.stream()
 			.map(recruitment -> new RecruitmentResponse(recruitment))
 			.collect(Collectors.toList());

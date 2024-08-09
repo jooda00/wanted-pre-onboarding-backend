@@ -14,7 +14,6 @@ public class RecruitmentResponse {
 	private int compensation;
 	private String skill;
 
-	// 두 테이블 각각 select 쿼리 나감 -> 총 2번의 select 쿼리
 	public RecruitmentResponse(Recruitment recruitment) {
 		this.recruitmentId = recruitment.getId();
 		this.companyName = recruitment.getCompany().getName();
