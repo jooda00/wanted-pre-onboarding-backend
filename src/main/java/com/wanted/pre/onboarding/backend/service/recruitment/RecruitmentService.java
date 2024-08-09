@@ -53,7 +53,7 @@ public class RecruitmentService {
 	}
 
 	public List<RecruitmentResponse> findRecruitmentList() {
-		List<RecruitmentResponse> recruitments = recruitmentRepository.findAll()
+		List<RecruitmentResponse> recruitments = recruitmentRepository.findAllRecruitmentWithCompany()
 			.stream()
 			.map(recruitment -> new RecruitmentResponse(recruitment))
 			.collect(Collectors.toList());
@@ -65,8 +65,8 @@ public class RecruitmentService {
 	}
 
 	public RecruitmentDetailResponse findRecruitmentDetail(Long id) {
-		Recruitment recruitment = recruitmentRepository.findById(id)
-			.orElseThrow(() -> new IllegalArgumentException("해당 채용공고는 존재하지 않습니다."));
+		Recruitment recruitment = recruitmentRepository.findRecruitmentByIdWithCompany(id);
+		if(recruitment == null) throw new IllegalArgumentException("해당 채용공고는 존재하지 않습니다.");
 		return new RecruitmentDetailResponse(recruitment);
 	}
 }

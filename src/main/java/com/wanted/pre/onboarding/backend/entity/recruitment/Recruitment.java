@@ -36,11 +36,11 @@ public class Recruitment {
 
 	private String skill;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-	@OneToMany(mappedBy = "recruitment", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "recruitment")
 	private List<Application> applications = new ArrayList<>();
 
 	public Recruitment(String position, int compensation, String content, String skill) {
