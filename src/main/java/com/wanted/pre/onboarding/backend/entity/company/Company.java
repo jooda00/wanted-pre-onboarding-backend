@@ -7,7 +7,6 @@ import com.wanted.pre.onboarding.backend.entity.recruitment.Recruitment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,7 +29,7 @@ public class Company {
 
 	private String city;
 
-	@OneToMany(mappedBy = "company", orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "company", orphanRemoval = true)
 	private List<Recruitment> recruitments = new ArrayList<>();
 
 	public Company(Long id, String name, String country, String city) {
@@ -39,8 +38,4 @@ public class Company {
 		this.country = country;
 		this.city = city;
 	}
-
-	// public void addRecruitment(Recruitment recruitment) {
-	// 	recruitments.add(recruitment);
-	// }
 }
