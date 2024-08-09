@@ -116,10 +116,9 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
     "skill": "Java, Spring",
     "content": "백엔드 개발자 구합니다. 과제테스트 포함입니다.",
     "otherRecruitmentsIds": [
-      1,
       2,
       5
-    ]
+    ] # 본인의 id는 포함하지 않는다.
 }
 ```
 
@@ -202,9 +201,10 @@ src.test
 - feat: 새로운 기능
 - chore: 빌드 업무 수정, 패키지 매니저 수정. 기능과 상관 없는 파일
 - refactor: 기능에 영향을 주지 않는 코드 리팩토링
-- test: 테스트 코드
-- docs: readme 수정
+- fix: 기능 수정
 - style: 코드 포맷팅
+- docs: readme 수정
+- test: 테스트 코드
 ```
 
 ### 📌 Branch 전략
