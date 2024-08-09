@@ -29,6 +29,7 @@ public class RecruitmentDetailResponse {
 		this.skill = recruitment.getSkill();
 		this.content = recruitment.getContent();
 		for (Recruitment r : recruitment.getCompany().getRecruitments()) {
+			if(r.getId().equals(recruitmentId)) continue;
 			otherRecruitmentsIds.add(r.getId());
 		}
 	}
