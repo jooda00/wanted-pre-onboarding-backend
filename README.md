@@ -3,7 +3,11 @@
 
 > 언어 및 프레임워크 : Java 17 & Spring Boot 3.3.2
 > 
-> RDBMS : MySql
+> RDBMS : MySQL
+> 
+> 개발 기간 : 24.07.30 ~ 24.08.05
+> 
+> 성능 및 구조 리팩터링 : ~ 24.08.13
 
 ### 📌 서비스 개요
 기업의 채용을 위한 웹 서비스. 
@@ -13,9 +17,9 @@
 #### 공통 응답
 요청이 정상적으로 처리된 경우
 
-(POST/PUT은 "CREATED", GET/DELETE는 "OK")
+###### POST/PUT은 "CREATED", GET/DELETE는 "OK"
 
-(밑의 응답 값은 data에 들어가는 json만 삽입했다.)
+(밑의 응답 값은 응답 코드를 제외하고 data에 들어가는 json만 삽입했다.)
 ```json
 {
   "code": "응답 코드",
@@ -86,6 +90,8 @@
 #### 5. 채용 공고 검색
 keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한다.
 
+`QueryDSL`을 사용한 동적 쿼리 생성
+
 `search=백엔드`
 ```json
 [
@@ -150,7 +156,8 @@ keyword를 받아서 해당 keyword를 가진 채용공고 목록을 반환한�
 ### 📌 테스트
 `service` 메소드 **단위 테스트** 실행
 1. `Given - When - Then` 패턴 사용
-2. `Mockito` 사용
+2. `Mockito` 사용하여 `mock` 객체 생성 후 테스트
+3. `기능`과 `예외` 테스트 클래스 분리를 통한 코드 가독성 및 유지 보수성 향상
 
 ### 📌 Structure
 ```
